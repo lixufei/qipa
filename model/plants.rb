@@ -1,4 +1,4 @@
 require 'active_record'
 
-class Plant <ActiveRecord::Base
+class Plant < ActiveRecord::Base
 end

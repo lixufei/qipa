@@ -2,6 +2,7 @@ require 'active_record'
 require 'erb'
 require 'yaml'
 require 'logger'
+require 'rspec/core/rake_task'
 
 task :default =>:migrate
 
@@ -12,7 +13,13 @@ end
 
 task :environment do
 	dbconfig = YAML.load(ERB.new(File.read(File.join("config", "database.yml"))).result)
-	env = ENV["ENV"] ? ENV["ENV"] : 'production'
+	env = ENV["ENV"] ? ENV["ENV"] : 'development'
 	ActiveRecord::Base.establish_connection(dbconfig[env])
 	ActiveRecord::Base.logger = Logger.new(File.open('database.log', 'a'))
 end
+
+RSpec::Core::RakeTask.new :specs do |task|
+	task.pattern = Dir['spec/**/*_spec.rb']
+end
+
+task :default => ['specs']

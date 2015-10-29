@@ -10,7 +10,7 @@ require './model/plants'
 
 use Rack::PostBodyContentTypeParser
 
-env = ENV["ENV"] ? ENV["ENV"] : 'production'
+env = ENV["ENV"] ? ENV["ENV"] : 'development'
 dbconfig = YAML.load(ERB.new(File.read(File.join("config", "database.yml"))).result)
 ActiveRecord::Base.establish_connection(dbconfig[env])
 

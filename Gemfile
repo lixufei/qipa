@@ -7,6 +7,8 @@ gem 'rack-contrib'
 
 group :development, :test do
   gem 'sqlite3'
+  gem 'rack-test'
+  gem 'rspec'
 end
 
 group :production do
