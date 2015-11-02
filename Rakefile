@@ -7,6 +7,7 @@ require 'rspec/core/rake_task'
 task :default =>:migrate
 
 desc "Migrate the database through scripts in db/."
+
 task :migrate =>:environment do
 	ActiveRecord::Migrator.migrate('db/', ENV["VERSION"] ? ENV["VERSION"].to_i : nil)
 end
