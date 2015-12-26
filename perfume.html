@@ -1,0 +1,55 @@
+<html>
+	<head>
+		<title>Bootstrap 101 Template</title>
+		<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+		<link href="./css/bootstrap.min.css" rel="stylesheet">
+	</head>
+
+	<body ng-app="my-perfume">
+		<h1>hello, PERFUME!</h1>
+		 <div class="table-responsive">
+		 	<!-- <button ng-click="tosave">save</button> -->
+		 	<a href="/save-perfume">save</a>
+		 	<table class="table table-striped">
+		 		<thead>
+			 		<tr>
+			 			<th>brand</th>
+			 			<th>price</th>
+			 			<th>more</th>
+			 		</tr>
+		 		</thead>
+
+		 		<tbody ng-controller="showPerfume"> 
+		 			<tr ng-repeat="plant in plants | orderBy: '-age'">
+		 				<td>{{plant.name}}</td>
+		 				<td>{{plant.age}}</td>
+		 				<td><button>delete</button></td>
+		 			</tr>
+		 			<tr ng-repeat="plant in newPlants">
+		 				<td>{{plant.name}}</td>
+		 				<td>{{plant.description}}</td>
+		 				<td><button>delete</button></td>
+		 			</tr>
+		 			<tr>
+		 				<td>GUCCI</td>
+		 				<td>6666</td>
+		 				<td><button>delete</button></td>
+		 			</tr>
+		 			<tr>
+		 				<td>Chanel</td>
+		 				<td>6666</td>
+		 				<td><button>delete</button></td>
+		 			</tr>
+		 			<tr>
+		 				<td>Dior</td>
+		 				<td>6666</td>
+		 				<td><button>delete</button></td>
+		 			</tr>
+		 		</tbody>
+		 	</table>	
+		<script src="./javascript/lib/angular.js"></script>
+    	<script src="./javascript/lib/bootstrap.min.js"></script>
+    	<script src="./javascript/perfume.js"></script>
+	</body>
+
+</html>

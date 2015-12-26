@@ -1,0 +1,11 @@
+#start server
+rackup
+
+#perfume-part
+front: bootstrap
+js: angular
+backup: sinatra
+
+#2015.12.21
+show plants list from database with angular
+next:save plant
