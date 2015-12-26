@@ -1,11 +1,19 @@
-<form>
+<head><script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script></head>
+<form ng-app="my-perfume" ng-controller="savePerfume" ng-submit="processForm()">
   <div class="form-group">
-    <label for="exampleInputEmail1">name</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="name">
+    <label for="exampleInputName">name</label>
+    <input type="text" class="form-control" id="exampleInputName" placeholder="name" ng-model="name" name="name">
   </div>
   <div class="form-group">
-    <label for="exampleInputPassword1">description</label>
-    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="description">
+    <label for="exampleInputDescription">description</label>
+    <input type="text" class="form-control" id="exampleInputDescription" placeholder="description" ng-model="description" name="description">
   </div>
-  <button type="submit" class="btn btn-default">Submit</button>
+  <button type="submit" class="btn btn-default" ng-click="saveData()">Submit</button>
 </form>
+
+
+<script src="./javascript/lib/angular.js"></script>
+<script src="./javascript/lib/bootstrap.min.js"></script>
+<script src="./javascript/perfume.js"></script>
+
+

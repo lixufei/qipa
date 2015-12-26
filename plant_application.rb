@@ -54,6 +54,10 @@ class PlantApplication < Sinatra::Base
 
 	get '/perfume' do
 		File.read("perfume.html")
+		end
+
+	get '/save-perfume' do
+		File.read("save-perfume.html")
 	end
 
 end
