@@ -8,7 +8,9 @@ require 'sqlite3'
 
 require './model/plants'
 
-class PlantApplication <Sinatra::Base
+set :root, File.dirname(__FILE__)
+
+class PlantApplication < Sinatra::Base
 	dbconfig = YAML.load(ERB.new(File.read(File.join("config", "database.yml"))).result)
 
 	configure :development do
@@ -30,6 +32,10 @@ class PlantApplication <Sinatra::Base
 	  plants.to_json
 	end
 
+	get '/home' do
+		File.read("home.html")
+	end
+
 	post '/plants' do
 		plant = Plant.create(:name => params[:name],
 			:description => params[:description],
@@ -44,6 +50,10 @@ class PlantApplication <Sinatra::Base
 	get '/plants/:id' do
 		plant = Plant.find(params[:id])
 		plant.to_json
+	end
+
+	get '/perfume' do
+		File.read("perfume.html")
 	end
 
 end
