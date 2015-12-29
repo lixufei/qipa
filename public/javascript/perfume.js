@@ -1,26 +1,6 @@
 var perfume = angular.module('my-perfume',[]);
 
  perfume.controller('savePerfume', ['$scope', '$http', function ($scope, $http) {
-
-	 //$scope.savePerfume = function (perfumeData) {
-	 // $params = $.param({
-	 //	 "name": myName,
-	 //	 "description": myDescription,
-	 // });
-	 // console.log('*****'+$params);
-	 // $http({
-	 //	 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-	 //	 url: '/plants',
-	 //	 method: 'POST',
-	 //	 data: $params,
-	 // })
-	 //	 .success(function(addData) {
-	 //		 $http.get('/plants').then(function(response){
-	 //			 $scope.newPlants = response.data;
-	 //		 });
-	 //	 });
-	 //};
-
 	 $scope.processForm = function() {
 	  $http({
 	 	 method: 'POST',
@@ -32,25 +12,6 @@ var perfume = angular.module('my-perfume',[]);
 	 		 console.log(data);
 	 	 });
 	 };
-	 //$scope.saveData = function() {
-	 // $scope.nameRequired = '';
-	 // $scope.emailRequired = '';
-	 // $scope.passwordRequired = '';
-	 //
-	 // if (!$scope.formInfo.Name) {
-	 //	 $scope.nameRequired = 'Name Required';
-	 // }
-	 //
-	 // if (!$scope.formInfo.Email) {
-	 //	 $scope.emailRequired = 'Email Required';
-	 // }
-	 //
-	 // if (!$scope.formInfo.Password) {
-	 //	 $scope.passwordRequired = 'Password Required';
-	 // }
-	 //};
-
-
 
  }]);
 
@@ -76,4 +37,78 @@ var perfume = angular.module('my-perfume',[]);
  	// 		$scope.newPlants = response;
  	// 	});
 
+	 $scope.delete = function(record) {
+		 $http.delete('/plants/' + record.id);
+		 $scope.newPlants.splice($scope.newPlants.indexOf(record), 1);
+	 };
+
+	 $scope.showEdit = true;
+	 $scope.master = {};
+
  }]);
+
+perfume.directive("edit",function($document){
+	return{
+		restrict: 'AE',
+		require: 'ngModel',
+		link: function(scope,element,attrs,ngModel){
+			element.bind("click",function(){
+				var id = "txt_name_" +ngModel.$modelValue.id;
+				scope.$apply(function(){
+					angular.copy(ngModel.$modelValue,scope.master);
+				})
+				var obj = $("#"+id);
+				obj.removeClass("inactive");
+				obj.addClass("active");
+				obj.removeAttr("readOnly");
+				scope.$apply(function(){
+					scope.showEdit = false;
+				})
+			});
+		}
+	}
+});
+perfume.directive("update",function($document, $http){
+	return{
+		restrict: 'AE',
+		require: 'ngModel',
+		link: function(scope,element,attrs,ngModel,http){
+			element.bind("click",function(){
+				var id = "txt_name_" +ngModel.$modelValue.id;
+				$http.put('/plants/'+id);
+				var obj = $("#"+id);
+				obj.removeClass("active");
+				obj.addClass("inactive");
+				obj.attr("readOnly",true);
+				scope.$apply(function(){
+					scope.showEdit = true;
+				})
+			})
+		}
+	}
+});
+
+perfume.directive("cancel",function($document){
+	return{
+		restrict: 'AE',
+		require: 'ngModel',
+		link: function(scope,element,attrs,ngModel){
+			element.bind("click",function(){
+				scope.$apply(function(){
+					angular.copy(scope.master,ngModel.$modelValue);
+					//console.log(ngModel.$modelValue);
+				})
+
+				var id = "txt_name_" +ngModel.$modelValue.id;
+				var obj = $("#"+id);
+				obj.removeClass("active");
+				obj.addClass("inactive");
+				obj.prop("readOnly",true);
+				scope.$apply(function(){
+					scope.showEdit = true;
+				})
+			})
+		}
+	}
+});
+

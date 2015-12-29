@@ -19,11 +19,11 @@ class PlantApplication < Sinatra::Base
 
 	configure :production do
 		ActiveRecord::Base.establish_connection(dbconfig['production'])
-	end	
+	end
 
 	configure :test do
 		ActiveRecord::Base.establish_connection(dbconfig['test'])
-	end	
+	end
 
 	use Rack::PostBodyContentTypeParser
 
@@ -50,6 +50,21 @@ class PlantApplication < Sinatra::Base
 	get '/plants/:id' do
 		plant = Plant.find(params[:id])
 		plant.to_json
+	end
+
+	delete '/plants/:id' do
+		plant = Plant.delete(params[:id])
+		plant.to_json
+	end
+
+	put '/plants/:id' do
+		puts "---------------------------"
+		plant = Plant.update(:name => params[:name],
+																		:description => params[:description],
+												 :created_at => Time.now,
+												 :updated_at => Time.now)
+		plant.to_json
+		puts "---------------------------"
 	end
 
 	get '/perfume' do

@@ -8,7 +8,6 @@
 	<body ng-app="my-perfume">
 		<h1>hello, PERFUME!</h1>
 		 <div class="table-responsive">
-		 	<!-- <button ng-click="tosave">save</button> -->
 		 	<a href="/save-perfume">save</a>
 		 	<table class="table table-striped">
 		 		<thead>
@@ -19,16 +18,32 @@
 			 		</tr>
 		 		</thead>
 
-		 		<tbody ng-controller="showPerfume"> 
-		 			<tr ng-repeat="plant in plants | orderBy: '-age'">
-		 				<td>{{plant.name}}</td>
-		 				<td>{{plant.age}}</td>
-		 				<td><button>delete</button></td>
-		 			</tr>
-		 			<tr ng-repeat="plant in newPlants">
-		 				<td>{{plant.name}}</td>
-		 				<td>{{plant.description}}</td>
-		 				<td><button>delete</button></td>
+				<tbody ng-controller="showPerfume">
+				<tr ng-repeat="plant in plants | orderBy: '-age'">
+					<td>{{plant.name}}</td>
+					<td>{{plant.age}}</td>
+					<td>
+						<button>delete</button>
+					</td>
+				</tr>
+				<tr ng-repeat="plant in newPlants">
+					<td><input id='txt_name_{{plant.id}}' ng-model="plant.name" value="{{plant.name}}" class="inactive"
+							   readonly/>
+					</td>
+					<td><input ng-model="plant.description" value="{{plant.description}}" class="inactive"
+							   readonly/></td>
+					<td>
+						<a ng-click="delete(plant)">delete</a>
+						<edit ng-Model="plant" ng-show="showEdit"><a>Edit</a></edit>
+						<update ng-Model="plant" ng-show="!showEdit"><a>Update</a></update>
+						<cancel ng-Model="plant" ng-show="!showEdit"> | <a>Cencel</a></cancel>
+					</td>
+				</tr>
+			</table>
+		</body>
+
+</html>
+</td>
 		 			</tr>
 		 			<tr>
 		 				<td>GUCCI</td>
