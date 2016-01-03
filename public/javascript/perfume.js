@@ -8,9 +8,9 @@ var perfume = angular.module('my-perfume',[]);
 		  params: {name: $('input[name="name"]').val(),description: $('input[name="description"]').val()}, // pass in data as strings
 	 	 headers: {'Content-Type': 'application/x-www-form-urlencoded'}  // set the headers so angular passing info as form data (not request payload)
 	  })
-	 	 .success(function (data) {
-	 		 console.log(data);
-	 	 });
+	 	 .success(function (req, res) {
+			  window.location = '/perfume';
+		  });
 	 };
 
  }]);
@@ -41,6 +41,19 @@ var perfume = angular.module('my-perfume',[]);
 		 $http.delete('/plants/' + record.id);
 		 $scope.newPlants.splice($scope.newPlants.indexOf(record), 1);
 	 };
+
+	 $scope.update = function (record) {
+		 console.log(record);
+		 $http({
+			 method: 'POST',
+			 url: '/plants/'+ record.id,
+			 params: {name: $('input[name="name"]').val(),description: $('input[name="description"]').val()}, // pass in data as strings
+			 headers: {'Content-Type': 'application/x-www-form-urlencoded'}  // set the headers so angular passing info as form data (not request payload)
+		 })
+			 .success(function (data) {
+				 console.log('******'+data);
+			 });
+	 }
 
 	 $scope.showEdit = true;
 	 $scope.master = {};
@@ -75,7 +88,7 @@ perfume.directive("update",function($document, $http){
 		link: function(scope,element,attrs,ngModel,http){
 			element.bind("click",function(){
 				var id = "txt_name_" +ngModel.$modelValue.id;
-				$http.put('/plants/'+id);
+				$http.put('/plants/'+ngModel.$modelValue);
 				var obj = $("#"+id);
 				obj.removeClass("active");
 				obj.addClass("inactive");

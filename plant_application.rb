@@ -2,6 +2,7 @@ require 'sinatra'
 require 'active_record'
 require 'json'
 require 'rack/contrib'
+require 'pry'
 
 require 'pg'
 require 'sqlite3'
@@ -57,14 +58,13 @@ class PlantApplication < Sinatra::Base
 		plant.to_json
 	end
 
-	put '/plants/:id' do
-		puts "---------------------------"
-		plant = Plant.update(:name => params[:name],
+	post '/plants/:id' do
+		plant = Plant.find_by(:id => params[:id])
+		plant.update(:name => params[:name],
 																		:description => params[:description],
 												 :created_at => Time.now,
 												 :updated_at => Time.now)
 		plant.to_json
-		puts "---------------------------"
 	end
 
 	get '/perfume' do

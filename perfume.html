@@ -1,70 +1,74 @@
 <html>
-	<head>
-		<title>Bootstrap 101 Template</title>
-		<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
-		<link href="./css/bootstrap.min.css" rel="stylesheet">
-	</head>
+<head>
+    <title>Bootstrap 101 Template</title>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+</head>
 
-	<body ng-app="my-perfume">
-		<h1>hello, PERFUME!</h1>
-		 <div class="table-responsive">
-		 	<a href="/save-perfume">save</a>
-		 	<table class="table table-striped">
-		 		<thead>
-			 		<tr>
-			 			<th>brand</th>
-			 			<th>price</th>
-			 			<th>more</th>
-			 		</tr>
-		 		</thead>
+<body ng-app="my-perfume">
+<h1>hello, PERFUME!</h1>
 
-				<tbody ng-controller="showPerfume">
-				<tr ng-repeat="plant in plants | orderBy: '-age'">
-					<td>{{plant.name}}</td>
-					<td>{{plant.age}}</td>
-					<td>
-						<button>delete</button>
-					</td>
-				</tr>
-				<tr ng-repeat="plant in newPlants">
-					<td><input id='txt_name_{{plant.id}}' ng-model="plant.name" value="{{plant.name}}" class="inactive"
-							   readonly/>
-					</td>
-					<td><input ng-model="plant.description" value="{{plant.description}}" class="inactive"
-							   readonly/></td>
-					<td>
-						<a ng-click="delete(plant)">delete</a>
-						<edit ng-Model="plant" ng-show="showEdit"><a>Edit</a></edit>
-						<update ng-Model="plant" ng-show="!showEdit"><a>Update</a></update>
-						<cancel ng-Model="plant" ng-show="!showEdit"> | <a>Cencel</a></cancel>
-					</td>
-				</tr>
-			</table>
-		</body>
+<div class="table-responsive">
+    <a href="/save-perfume">save</a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>brand</th>
+            <th>price</th>
+            <th>more</th>
+        </tr>
+        </thead>
 
-</html>
-</td>
-		 			</tr>
-		 			<tr>
-		 				<td>GUCCI</td>
-		 				<td>6666</td>
-		 				<td><button>delete</button></td>
-		 			</tr>
-		 			<tr>
-		 				<td>Chanel</td>
-		 				<td>6666</td>
-		 				<td><button>delete</button></td>
-		 			</tr>
-		 			<tr>
-		 				<td>Dior</td>
-		 				<td>6666</td>
-		 				<td><button>delete</button></td>
-		 			</tr>
-		 		</tbody>
-		 	</table>	
-		<script src="./javascript/lib/angular.js"></script>
-    	<script src="./javascript/lib/bootstrap.min.js"></script>
-    	<script src="./javascript/perfume.js"></script>
-	</body>
+        <tbody ng-controller="showPerfume">
+        <tr ng-repeat="plant in plants | orderBy: '-age'">
+            <td>{{plant.name}}</td>
+            <td>{{plant.age}}</td>
+            <td>
+                <button>delete</button>
+            </td>
+        </tr>
+        <tr ng-repeat="plant in newPlants">
+            <td><input value="{{plant.name}}" name="name"/>
+            </td>
+            <td><input name="description" value="{{plant.description}}"
+                    /></td>
+            <td>
+                <a ng-click="update(plant)">update</a>
+                <a ng-click="delete(plant)">delete</a>
+                <edit ng-Model="plant" ng-show="showEdit"><a>Edit</a></edit>
+                <!--<update ng-Model="plant" ng-show="!showEdit"><a>Update</a></update>-->
+                <cancel ng-Model="plant" ng-show="!showEdit"> | <a>Cencel</a></cancel>
+            </td>
+        </tr>
+
+        </tr>
+        <tr>
+            <td>GUCCI</td>
+            <td>6666</td>
+            <td>
+                <button>delete</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Chanel</td>
+            <td>6666</td>
+            <td>
+                <button>delete</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Dior</td>
+            <td>6666</td>
+            <td>
+                <button>delete</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="./javascript/lib/angular.js"></script>
+<script src="./javascript/lib/bootstrap.min.js"></script>
+<script src="./javascript/perfume.js"></script>
+</body>
 
 </html>
