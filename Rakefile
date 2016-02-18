@@ -6,6 +6,9 @@ require 'rspec/core/rake_task'
 
 task :default =>:migrate
 
+task :unit => ['unit']
+# task :test => %w[test:end_to_end]
+
 desc "Migrate the database through scripts in db/."
 
 task :migrate =>:environment do
@@ -20,7 +23,18 @@ task :environment do
 end
 
 RSpec::Core::RakeTask.new :specs do |task|
-	task.pattern = Dir['spec/**/*_spec.rb']
+	task.pattern = Dir['spec/unit/*.rb']
 end
+
+desc 'Unit Tests'
+RSpec::Core::RakeTask.new :unit do |t|
+	t.pattern = Dir.glob('spec/unit/*.rb')
+end
+
+
+# desc 'End-to-End Tests'
+# RSpec::Core::RakeTask.new(:end_to_end) do |t|
+# 	t.pattern = Dir.glob('spec/end_to_end/*.rb')
+# end
 
 task :default => ['specs']

@@ -7,6 +7,7 @@ describe 'Root Path' do
 		it 'is successful' do
 			get '/plants'
 			expect(last_response.status).to eq 200
-		end
+    end
+
 	end
 end
