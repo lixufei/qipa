@@ -2,7 +2,7 @@
 rackup
 
 #run test
-rspec + test directory
+rspec + test directory /bundle exec rake functional
 
 #perfume-part
 front: bootstrap
