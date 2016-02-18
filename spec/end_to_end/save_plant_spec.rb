@@ -18,6 +18,13 @@ describe 'Plant Creation', :type => :feature do
   context 'Successfully creating a new plant' do
 
     it 'should create the new plant', :js => true do
+      click_link('save')
+      page.fill_in 'exampleInputName', :with => 'xufei'
+      page.fill_in 'exampleInputDescription', :with => 'perfect'
+      click_button 'Submit'
+
+      page.has_content?('xufei')
+      page.has_content?('perfect')
       expect(1).to equal 1
     end
   end
